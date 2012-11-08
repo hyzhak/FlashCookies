@@ -2,7 +2,6 @@ package org.hyzhak.flashCookies.tests
 {
 	import org.hamcrest.assertThat;
 	import org.hamcrest.object.notNullValue;
-	import org.hamcrest.object.nullValue;
 	import org.hamcrest.text.emptyString;
 	import org.hyzhak.flashCookies.Cookies;
 	import org.hyzhak.flashCookies.builder.CookiesBuilder;
@@ -10,28 +9,6 @@ package org.hyzhak.flashCookies.tests
 
 	public class CookiesTest
 	{
-		
-		
-		[Before]
-		public function setUp():void
-		{
-		}
-		
-		[After]
-		public function tearDown():void
-		{
-		}
-		
-		[BeforeClass]
-		public static function setUpBeforeClass():void
-		{
-		}
-		
-		[AfterClass]
-		public static function tearDownAfterClass():void
-		{
-		}
-		
 		[Test]
 		public function testSharedObjectConnection():void
 		{
