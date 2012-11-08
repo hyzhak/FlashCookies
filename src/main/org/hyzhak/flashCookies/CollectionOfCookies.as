@@ -1,6 +1,5 @@
-package org.hyzhak.flashCookies.connections
+package org.hyzhak.flashCookies
 {
-	import org.hyzhak.flashCookies.Cookies;
 
 	public class CollectionOfCookies implements Cookies
 	{

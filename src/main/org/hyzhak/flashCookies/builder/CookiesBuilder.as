@@ -1,12 +1,10 @@
 package org.hyzhak.flashCookies.builder
 {
-	import org.hyzhak.flashCookies.connections.LogCookies;
-	import org.hyzhak.flashCookies.connections.CollectionOfCookies;
 	import org.hyzhak.flashCookies.Cookies;
-	import org.hyzhak.flashCookies.connections.SharedObjectCookies;
-	import org.hyzhak.flashCookies.connections.CookiesConnectionBuilder;
+	import org.hyzhak.flashCookies.CollectionOfCookies;
+	import org.hyzhak.flashCookies.connections.CookiesConnectionFactory;
 
-	public class CookiesBuilder implements CookiesConnectionBuilder, CookiesBundleBuilder, CookiesInstanceBuilder
+	public class CookiesBuilder implements CookiesConnectionBuilder, CookiesBundleBuilder, CookiesInstanceBuilder, CookiesBuilderState
 	{
 		private static var _instance : CookiesBuilder = new CookiesBuilder();
 		
@@ -27,24 +25,32 @@ package org.hyzhak.flashCookies.builder
 		//  CookiesConnectionBuilder 
 		//
 		//--------------------------------------------------------------------------
+		private var _connectionFactories:Vector.<CookiesConnectionFactory> = new Vector.<CookiesConnectionFactory>();
 		
-		public function withSharedObject() : CookiesBundleBuilder 
+		public function connectedTo(factory:CookiesConnectionFactory):CookiesBundleBuilder
 		{
-			_withSharedObject = true;
+			_connectionFactories.push(factory);
+			
 			return this;
 		}
 		
-		public function withRest() : CookiesBundleBuilder			
-		{
-			_withREST = true;
-			return this;
-		}
-		
-		public function withLog() : CookiesBundleBuilder
-		{
-			_withLog = true;		
-			return this;
-		}
+//		public function withSharedObject() : CookiesBundleBuilder 
+//		{
+//			_withSharedObject = true;
+//			return this;
+//		}
+//		
+//		public function withRest() : CookiesBundleBuilder			
+//		{
+//			_withREST = true;
+//			return this;
+//		}
+//		
+//		public function withLog() : CookiesBundleBuilder
+//		{
+//			_withLog = true;		
+//			return this;
+//		}
 		
 		//--------------------------------------------------------------------------
 		//
@@ -56,6 +62,21 @@ package org.hyzhak.flashCookies.builder
 		{
 			_bundleName = name;
 			return this;
+		}
+		
+		//--------------------------------------------------------------------------
+		//
+		//  CookiesBuilderState 
+		//
+		//--------------------------------------------------------------------------
+		public function getBundleNane() : String
+		{
+			return _bundleName;
+		}
+		
+		public function get isAutoSync() : Boolean
+		{
+			return _autoSync
 		}
 		
 		//--------------------------------------------------------------------------
@@ -74,20 +95,25 @@ package org.hyzhak.flashCookies.builder
 		{
 			var instances : Vector.<Cookies> = new Vector.<Cookies>();
 			
-			if(_withLog)
+			for each(var factory : CookiesConnectionFactory in _connectionFactories)
 			{
-				instances.push(new LogCookies(_bundleName));				
+				instances.push(factory.create(null));
 			}
 			
-			if(_withREST)
-			{
-				//TODO:...
-			}
-			
-			if(_withSharedObject)
-			{
-				instances.push(new SharedObjectCookies(_bundleName, _autoSync));				
-			}	
+//			if(_withLog)
+//			{
+//				instances.push(new LogCookies(_bundleName));				
+//			}
+//			
+//			if(_withREST)
+//			{
+//				//TODO:...
+//			}
+//			
+//			if(_withSharedObject)
+//			{
+//				instances.push(new SharedObjectCookies(_bundleName, _autoSync));				
+//			}	
 			
 			if(instances.length == 1)
 			{

@@ -1,14 +1,16 @@
-package org.hyzhak.flashCookies.connections
+package org.hyzhak.flashCookies.connections.flexLogger
 {
 	import mx.logging.ILogger;
 	import mx.logging.Log;
+	
 	import org.hyzhak.flashCookies.Cookies;
+	import org.hyzhak.flashCookies.connections.CookiesConnection;
 
-	public class LogCookies implements Cookies
+	public class FlexLoggerCookies implements CookiesConnection
 	{
 		private var _logger : ILogger;
 		
-		public function LogCookies(bundleName : String) 
+		public function FlexLoggerCookies(bundleName : String) 
 		{
 			_logger = Log.getLogger("Cookies_" + bundleName);
 		}

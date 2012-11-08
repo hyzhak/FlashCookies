@@ -1,9 +1,9 @@
-package org.hyzhak.flashCookies.connections
+package org.hyzhak.flashCookies.connections.sharedObject
 {
 	import flash.net.SharedObject;
-	import org.hyzhak.flashCookies.Cookies;
+	import org.hyzhak.flashCookies.connections.CookiesConnection;
 
-	public class SharedObjectCookies implements Cookies
+	public class SharedObjectCookies implements CookiesConnection
 	{
 		private var _sharedObject : SharedObject;
 		private var _autoSync : Boolean = false;

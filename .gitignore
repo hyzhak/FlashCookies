@@ -5,6 +5,7 @@ bin/
 
 # Project property files
 .actionScriptProperties
+.FlexUnitSettings
 .flexLibProperties
 .flexProperties
 .settings/
