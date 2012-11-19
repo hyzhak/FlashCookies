@@ -6,6 +6,7 @@ package org.hyzhak.flashCookies.tests
 	import org.hyzhak.flashCookies.Cookies;
 	import org.hyzhak.flashCookies.builder.CookiesBuilder;
 	import org.hyzhak.flashCookies.connections.sharedObject.SharedObjectConnection;
+	import org.hyzhak.flashCookies.connections.traces.TracesConnection;
 
 	public class CookiesTest
 	{
@@ -16,6 +17,24 @@ package org.hyzhak.flashCookies.tests
 			{
 				var cookies:Cookies = CookiesBuilder.newCookies()
 					.connectedTo(SharedObjectConnection.base())
+					.bundle("test")
+					.build();
+				
+				assertThat(cookies, notNullValue());
+			}
+			catch(e : Error)
+			{
+				assertThat(e.message, emptyString());
+			}			
+		}
+		
+		[Test]
+		public function testTracesConnection():void
+		{
+			try
+			{
+				var cookies:Cookies = CookiesBuilder.newCookies()
+					.connectedTo(TracesConnection.base())
 					.bundle("test")
 					.build();
 				

@@ -13,10 +13,6 @@ package org.hyzhak.flashCookies.builder
 			return _instance;
 		}
 		
-		private var _withSharedObject :Boolean = false;
-		private var _withREST :Boolean = false;
-		private var _withLog :Boolean = false;
-		
 		private var _bundleName:String;
 		private var _autoSync:Boolean;
 		
@@ -29,28 +25,9 @@ package org.hyzhak.flashCookies.builder
 		
 		public function connectedTo(factory:CookiesConnectionFactory):CookiesBundleBuilder
 		{
-			_connectionFactories.push(factory);
-			
+			_connectionFactories.push(factory);			
 			return this;
 		}
-		
-//		public function withSharedObject() : CookiesBundleBuilder 
-//		{
-//			_withSharedObject = true;
-//			return this;
-//		}
-//		
-//		public function withRest() : CookiesBundleBuilder			
-//		{
-//			_withREST = true;
-//			return this;
-//		}
-//		
-//		public function withLog() : CookiesBundleBuilder
-//		{
-//			_withLog = true;		
-//			return this;
-//		}
 		
 		//--------------------------------------------------------------------------
 		//
@@ -97,24 +74,9 @@ package org.hyzhak.flashCookies.builder
 			
 			for each(var factory : CookiesConnectionFactory in _connectionFactories)
 			{
-				instances.push(factory.create(null));
+				instances.push(factory.create(this));
 			}
-			
-//			if(_withLog)
-//			{
-//				instances.push(new LogCookies(_bundleName));				
-//			}
-//			
-//			if(_withREST)
-//			{
-//				//TODO:...
-//			}
-//			
-//			if(_withSharedObject)
-//			{
-//				instances.push(new SharedObjectCookies(_bundleName, _autoSync));				
-//			}	
-			
+						
 			if(instances.length == 1)
 			{
 				return instances[0];
